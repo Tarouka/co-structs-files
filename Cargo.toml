@@ -1,0 +1,5 @@
+[package]
+name = "co-structs-files"
+version = "0.1.0"
+authors = ["tarouka"]
+description = "CO files structures"
