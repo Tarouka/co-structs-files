@@ -262,7 +262,7 @@ mod serializer {
 			serializer.push_value(&self.buy_cps_price);
 			serializer.push_value(&self.type_name);
 			serializer.push_value(&self.description);
-			serializer.push_last_value(&self.unknown_1);
+			serializer.push_value(&self.unknown_1);
 
 			serializer.get_buffer()
 		}
