@@ -1,4 +1,7 @@
 #![allow(dead_code)]
 
-mod item;
+#[macro_use]
+mod parser;
 mod serializer;
+
+mod item;

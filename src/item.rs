@@ -1,119 +1,42 @@
 pub struct BaseItem {
-	id:              u32,
-	name:            String,
-	requirements:    ItemRequirements,
-	flags:           ItemFlags,
-	combat_stats:    ItemCombatStats,
-	weight:          u16,
-	buy_price:       u32,
-	action_id:       u32,
-	hp_restored:     u16,
-	mp_restored:     u16,
-	amount:          u16,
-	amount_limit:    u16,
-	status:          u16,
-	gem1:            u8,
-	gem2:            u8,
-	magic1:          u8,
-	magic2:          u8,
-	magic3:          u8,
-	fray_mode:       u32,
-	repair_mode:     u32,
-	type_mask:       u32,
-	buy_cps_price:   u16,
-	type_name:       String,
-	description:     String,
-	unknown_1:       u8
-}
-
-impl BaseItem {
-	// Gets unique item base ID
-	pub fn get_id(&self) -> u32 { self.id }
-
-	// Gets item name
-	pub fn get_name(&self) -> &String { &self.name }
-
-	// Gets item requirements
-	pub fn get_requirements(&self) -> &ItemRequirements { &self.requirements }
-
-	// Gets item flags
-	pub fn get_flags(&self) -> &ItemFlags { &self.flags }
-
-	// Gets item combat stats
-	pub fn get_combat_stats(&self) -> &ItemCombatStats { &self.combat_stats }
-
-	// Gets item weight
-	pub fn get_weight(&self) -> u16 { self.weight }
-
-	// Gets item silver buy price
-	pub fn get_buy_price(&self) -> u32 { self.buy_price }
-
-	// Gets item action ID
-	pub fn get_action_id(&self) -> u32 { self.action_id }
-
-	// Gets item total HP restored (e.g. health potions)
-	pub fn get_hp_restored(&self) -> u16 { self.hp_restored }
-
-	// Gets item total MP restored (e.g. mana potions)
-	pub fn get_mp_restored(&self) -> u16 { self.mp_restored }
-
-	// Gets item amount/quantity (notably used for arrow packs)
-	pub fn get_amount(&self) -> u16 { self.amount }
-
-	// Gets amount limit value
-	pub fn get_amount_limit(&self) -> u16 { self.amount_limit }
-
-	// Gets item status caused
-	pub fn get_status(&self) -> u16 { self.status }
-
-	// Gets item Gem1 attribute
-	pub fn get_gem1(&self) -> u8 { self.gem1 }
-
-	// Gets item Gem2 attribute
-	pub fn get_gem2(&self) -> u8 { self.gem2 }
-
-	// Gets item Magic1 attribute
-	pub fn get_magic1(&self) -> u8 { self.magic1 }
-
-	// Gets item Magic2 attribute
-	pub fn get_magic2(&self) -> u8 { self.magic2 }
-
-	// Gets item Magic3 attribute
-	pub fn get_magic3(&self) -> u8 { self.magic3 }
-
-	// Gets item FrayMode
-	pub fn get_fray_mode(&self) -> u32 { self.fray_mode }
-
-	// Gets item repair mode
-	pub fn get_repair_mode(&self) -> u32 { self.repair_mode }
-
-	// Gets item type mask
-	pub fn get_type_mask(&self) -> u32 { self.type_mask }
-
-	// Gets item CP price (for buying)
-	pub fn get_buy_cps_price(&self) -> u16 { self.buy_cps_price }
-
-	// Gets item type name
-	pub fn get_type_name(&self) -> &String { &self.type_name }
-
-	// Gets item description
-	pub fn get_description(&self) -> &String { &self.description }
-
-	// Gets item unknown flag
-	pub fn get_unknown_1(&self) -> u8 { self.unknown_1 }
+	pub id:              u32,
+	pub name:            String,
+	pub requirements:    ItemRequirements,
+	pub flags:           ItemFlags,
+	pub combat_stats:    ItemCombatStats,
+	pub weight:          u16,
+	pub buy_price:       u32,
+	pub action_id:       u32,
+	pub hp_restored:     u16,
+	pub mp_restored:     u16,
+	pub amount:          u16,
+	pub amount_limit:    u16,
+	pub status:          u16,
+	pub gem1:            u8,
+	pub gem2:            u8,
+	pub magic1:          u8,
+	pub magic2:          u8,
+	pub magic3:          u8,
+	pub fray_mode:       u32,
+	pub repair_mode:     u32,
+	pub type_mask:       u32,
+	pub buy_cps_price:   u16,
+	pub type_name:       String,
+	pub description:     String,
+	pub unknown_1:       u8
 }
 
 pub struct ItemFlags {
-	sell_disabled:       bool,
-	no_drop_on_death:    bool,
-	important_sell_hint: bool,
-	important_drop_hint: bool,
-	is_unstoreable:      bool,
-	is_untradeable:      bool
+	pub sell_disabled:       bool,
+	pub no_drop_on_death:    bool,
+	pub important_sell_hint: bool,
+	pub important_drop_hint: bool,
+	pub is_unstoreable:      bool,
+	pub is_untradeable:      bool
 }
 
 impl ItemFlags {
-	pub fn get_flags_from_byte(flags: &i32) -> ItemFlags {
+	pub fn from_byte(flags: &u8) -> ItemFlags {
 		ItemFlags {
 			sell_disabled:       (flags & 0x20) > 0,
 			no_drop_on_death:    (flags & 0x10) > 0,
@@ -124,7 +47,7 @@ impl ItemFlags {
 		}
 	}
 
-	pub fn get_byte_from_flags(&self) -> u8 {
+	pub fn get_as_byte(&self) -> u8 {
 		let mut flag: u8 = 0;
 		flag |= if self.is_untradeable { 0x01 } else { 0x00 };
 		flag |= if self.is_unstoreable { 0x02 } else { 0x00 };
@@ -138,14 +61,14 @@ impl ItemFlags {
 }
 
 pub struct ItemRequirements {
-	profession:      u8,
-	proficiency_lvl: u8,
-	lvl:             u8,
-	sex:             u8,
-	str:             u16,
-	agi:             u16,
-	vit:             u16,
-	spi:             u16
+	pub profession:      u8,
+	pub proficiency_lvl: u8,
+	pub lvl:             u8,
+	pub sex:             u8,
+	pub str:             u16,
+	pub agi:             u16,
+	pub vit:             u16,
+	pub spi:             u16
 }
 
 impl ItemRequirements {
@@ -169,9 +92,6 @@ impl ItemRequirements {
 
 	// Tests if SPI stat matches item requirement.
 	pub fn is_spi_ok(&self, spi: &u16) -> bool { *spi >= self.spi }
-
-	// Returns the sex ID required to equip the item.
-	pub fn get_sex_required(&self) -> u8 { self.sex }
 }
 
 pub struct ItemCombatStats {
@@ -184,35 +104,6 @@ pub struct ItemCombatStats {
 	pub magic_def:       u16,
 	pub atk_range:       u8,
 	pub atk_speed:       u16
-}
-
-impl ItemCombatStats {
-	// Gets max phys ATK value
-	pub fn get_max_phys_atk(&self) -> u16 { self.max_phys_atk }
-
-	// Gets min phys ATK value
-	pub fn get_min_phys_atk(&self) -> u16 { self.min_phys_atk }
-
-	// Gets phys DEF value
-	pub fn get_phys_def(&self) -> u16 { self.phys_def }
-
-	// Gets accuracy value
-	pub fn get_accuracy(&self) -> u8 { self.accuracy }
-
-	// Gets dodge value
-	pub fn get_dodge(&self) -> u8 { self.dodge }
-
-	// Gets magic ATK value
-	pub fn get_magic_atk(&self) -> u16 { self.magic_atk }
-
-	// Gets Magic DEF value
-	pub fn get_magic_def(&self) -> u16 { self.magic_def }
-
-	// Gets ATK range value
-	pub fn get_atk_range(&self) -> u8 {self.atk_range }
-
-	// Gets ATK speed value
-	pub fn get_atk_speed(&self) -> u16 { self.atk_speed }
 }
 
 mod serializer {
@@ -233,7 +124,7 @@ mod serializer {
 			serializer.push_value(&self.requirements.agi);
 			serializer.push_value(&self.requirements.vit);
 			serializer.push_value(&self.requirements.spi);
-			serializer.push_value(&self.flags.get_byte_from_flags());
+			serializer.push_value(&self.flags.get_as_byte());
 			serializer.push_value(&self.weight);
 			serializer.push_value(&self.buy_price);
 			serializer.push_value(&self.action_id);
@@ -265,6 +156,76 @@ mod serializer {
 			serializer.push_value(&self.unknown_1);
 
 			serializer.get_buffer()
+		}
+	}
+}
+
+mod parser {
+	use super::*;
+	use parser::*;
+
+	impl SpaceSeparatedParseable<BaseItem> for BaseItem {
+		fn from_line(line: &String) -> Result<BaseItem, SpaceSeparatedParserError> {
+			let results = get_space_separated_values(line);
+
+			if results.len() < 38 {
+				return Result::Err(SpaceSeparatedParserError::MissingAtIndex(results.len()));
+			}
+
+			let item = BaseItem {
+				id:            get_value_as!(results, 0, u32, "id"),
+				name:          results[1].get_value().to_owned(),
+
+				requirements:  ItemRequirements {
+					profession:      get_value_as!(results, 1, u8, "profession requirement"),
+					proficiency_lvl: get_value_as!(results, 2, u8, "proficiency level requirement"),
+					lvl:             get_value_as!(results, 3, u8, "level requirement"),
+					sex:             get_value_as!(results, 4, u8, "sex requirement"),
+					str:             get_value_as!(results, 5, u16, "strength requirement"),
+					agi:             get_value_as!(results, 6, u16, "agility requirement"),
+					vit:             get_value_as!(results, 7, u16, "vitality requirement"),
+					spi:             get_value_as!(results, 8, u16, "spirit requirement")
+				},
+
+				flags:         ItemFlags::from_byte(&get_value_as!(results, 9, u8, "item flags")),
+
+				weight:        get_value_as!(results, 10, u16, "weight"),
+				buy_price:     get_value_as!(results, 11, u32, "buy price (silver)"),
+				action_id:     get_value_as!(results, 12, u32, "action id"),
+
+				combat_stats:  ItemCombatStats {
+					max_phys_atk:    get_value_as!(results, 13, u16, "max phys attack"),
+					min_phys_atk:    get_value_as!(results, 14, u16, "min phys attack"),
+					phys_def:        get_value_as!(results, 15, u16, "physical defense"),
+					accuracy:        get_value_as!(results, 16, u8, "accuracy"),
+					dodge:           get_value_as!(results, 17, u8, "dodge"),
+					magic_atk:       get_value_as!(results, 28, u16, "magic atk"),
+					magic_def:       get_value_as!(results, 29, u16, "magic def"),
+					atk_range:       get_value_as!(results, 30, u8, "attack range"),
+					atk_speed:       get_value_as!(results, 31, u16, "attack speed")
+				},
+
+				hp_restored:   get_value_as!(results, 18, u16, "hp restored"),
+				mp_restored:   get_value_as!(results, 19, u16, "mp restored"),
+				amount:        get_value_as!(results, 20, u16, "amount"),
+				amount_limit:  get_value_as!(results, 21, u16, "amount limit"),
+				status:        get_value_as!(results, 22, u16, "status"),
+				gem1:          get_value_as!(results, 23, u8, "gem 1"),
+				gem2:          get_value_as!(results, 24, u8, "gem 2"),
+				magic1:        get_value_as!(results, 25, u8, "magic 1"),
+				magic2:        get_value_as!(results, 26, u8, "magic 2"),
+				magic3:        get_value_as!(results, 27, u8, "magic 3"),
+
+				fray_mode:     get_value_as!(results, 32, u32, "fray mode"),
+				repair_mode:   get_value_as!(results, 33, u32, "repair mode"),
+				type_mask:     get_value_as!(results, 34, u32, "type mask"),
+				buy_cps_price: get_value_as!(results, 35, u16, "buy price (cps)"),
+				type_name:     results[36].get_value().to_owned(),
+				description:   results[37].get_value().to_owned(),
+				unknown_1:     get_value_as!(results, 38, u8, "unknown 1")
+			};
+
+			Result::Ok(item)
 		}
 	}
 }
