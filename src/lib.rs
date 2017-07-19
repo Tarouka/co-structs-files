@@ -8,3 +8,4 @@ mod serializer;
 
 mod item;
 mod monster;
+mod magictype;
